@@ -1,15 +1,374 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Audry's Page</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>
-            About Me
-        </h1>
-        <p>
-            
-        </p>
-    </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audry Stempel — Software Engineer</title>
+<meta name="description" content="Audry Stempel is a full-stack software engineer at Lucky Orange, shipping Vue and Node.js across a microservices platform — billing, tracking, and AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0e14;
+  --bg2:#111622;
+  --panel:#151b29;
+  --line:rgba(255,255,255,.08);
+  --text:#e8ecf4;
+  --dim:#8b93a7;
+  --orange:#ff7a3d;
+  --green:#4ade80;
+  --glow:rgba(255,122,61,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);
+  overflow-x:hidden;line-height:1.6;
+}
+.mono{font-family:'JetBrains Mono',monospace}
+::selection{background:var(--orange);color:#0b0e14}
+a{color:var(--orange)}
+
+/* grid backdrop */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+main{position:relative;z-index:1}
+
+/* nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2rem;background:rgba(11,14,20,.8);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+nav .logo{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);text-decoration:none}
+nav .logo span{color:var(--orange)}
+nav ul{display:flex;gap:1.8rem;list-style:none}
+nav ul a{color:var(--dim);text-decoration:none;font-size:.92rem;transition:color .2s}
+nav ul a:hover{color:var(--orange)}
+@media(max-width:640px){nav ul{gap:1rem;font-size:.85rem}}
+
+/* hero */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  max-width:1060px;margin:0 auto;padding:7rem 1.5rem 4rem;position:relative;
+}
+.hero::before{
+  content:"";position:absolute;top:20%;right:-10%;width:480px;height:480px;
+  background:radial-gradient(circle,var(--glow),transparent 65%);
+  filter:blur(20px);pointer-events:none;
+}
+.hero .intro{color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:1.2rem}
+.hero h1{
+  font-size:clamp(2.6rem,7.5vw,5.2rem);font-weight:800;line-height:1.05;
+  letter-spacing:-.02em;
+}
+.hero h1 .accent{
+  background:linear-gradient(90deg,var(--orange),#ffb347);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .sub{margin-top:1.4rem;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--dim);max-width:44rem}
+.hero .sub b{color:var(--text);font-weight:600}
+.hero .cta{margin-top:2.6rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:.8rem 1.6rem;border-radius:10px;text-decoration:none;
+  font-weight:600;font-size:.95rem;border:1px solid var(--line);color:var(--text);
+  transition:transform .15s,box-shadow .2s,border-color .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{
+  background:linear-gradient(90deg,var(--orange),#ff9a5c);color:#14100c;border:none;
+  box-shadow:0 0 24px var(--glow);
+}
+.btn.primary:hover{box-shadow:0 0 38px var(--glow)}
+.btn.ghost:hover{border-color:var(--orange);color:var(--orange)}
+.stats{display:flex;gap:2.6rem;margin-top:3.4rem;flex-wrap:wrap}
+.stat .num{
+  font-family:'JetBrains Mono',monospace;font-size:1.9rem;font-weight:600;color:var(--green);
+}
+.stat .lbl{color:var(--dim);font-size:.85rem;margin-top:.15rem}
+
+/* sections */
+section{max-width:1060px;margin:0 auto;padding:5.5rem 1.5rem}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;color:var(--orange);font-size:.85rem;
+  letter-spacing:.08em;margin-bottom:.8rem;
+}
+.eyebrow::before{content:"// "}
+h2{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;letter-spacing:-.01em;margin-bottom:2rem}
+
+/* featured project */
+.featured{
+  border:1px solid var(--line);border-radius:18px;padding:2.4rem;
+  background:
+    radial-gradient(600px 300px at 85% 0%,rgba(74,222,128,.08),transparent),
+    radial-gradient(500px 300px at 0% 100%,rgba(255,122,61,.08),transparent),
+    var(--panel);
+  position:relative;overflow:hidden;
+}
+.featured .badge{
+  display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.75rem;
+  color:var(--green);border:1px solid rgba(74,222,128,.4);border-radius:999px;
+  padding:.25rem .8rem;margin-bottom:1.2rem;background:rgba(74,222,128,.08);
+}
+.featured h3{font-size:1.7rem;font-weight:800}
+.featured h3 .mono{color:var(--orange);font-weight:600}
+.featured p{color:var(--dim);margin-top:.9rem;max-width:46rem}
+.featured p b{color:var(--text)}
+.pipeline{
+  display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.6rem;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;
+}
+.pipeline .step{
+  border:1px solid var(--line);border-radius:8px;padding:.45rem .85rem;background:var(--bg2);
+}
+.pipeline .arrow{color:var(--orange)}
+.tagrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.6rem}
+.tag{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--dim);
+  border:1px solid var(--line);border-radius:6px;padding:.25rem .6rem;
+}
+
+/* work grid */
+.work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+.wcard{
+  border:1px solid var(--line);border-radius:14px;padding:1.6rem;background:var(--panel);
+  transition:transform .18s,border-color .2s,box-shadow .2s;
+}
+.wcard:hover{transform:translateY(-4px);border-color:rgba(255,122,61,.5);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.wcard .ico{font-size:1.5rem}
+.wcard h3{font-size:1.12rem;margin:.7rem 0 .5rem;font-weight:600}
+.wcard p{color:var(--dim);font-size:.93rem}
+.wcard .repos{
+  margin-top:.9rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--green);
+}
+
+/* stack */
+.stack{display:flex;flex-wrap:wrap;gap:.7rem}
+.chip{
+  font-family:'JetBrains Mono',monospace;font-size:.88rem;padding:.55rem 1.05rem;
+  border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);
+  transition:border-color .2s,color .2s,transform .15s;cursor:default;
+}
+.chip:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px)}
+.stack-note{color:var(--dim);font-size:.9rem;margin-top:1.4rem;max-width:44rem}
+
+/* timeline */
+.timeline{border-left:1px solid var(--line);padding-left:2rem;position:relative}
+.tl{position:relative;padding-bottom:2.4rem}
+.tl:last-child{padding-bottom:0}
+.tl::before{
+  content:"";position:absolute;left:-2.42rem;top:.4rem;width:.8rem;height:.8rem;border-radius:50%;
+  background:var(--orange);box-shadow:0 0 12px var(--glow);
+}
+.tl .when{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:.82rem}
+.tl h3{font-size:1.25rem;margin:.3rem 0 .4rem;font-weight:600}
+.tl p{color:var(--dim);max-width:44rem}
+
+/* quotes */
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+.quote{
+  border:1px solid var(--line);border-radius:14px;padding:1.8rem;background:var(--panel);position:relative;
+}
+.quote::before{
+  content:"“";position:absolute;top:.4rem;left:1.1rem;font-size:3.2rem;color:var(--orange);opacity:.6;
+}
+.quote p{color:var(--dim);font-size:.95rem;margin-top:1.2rem}
+.quote .who{margin-top:1rem;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+
+/* contact */
+.contact{
+  text-align:center;border:1px solid var(--line);border-radius:20px;
+  background:
+    radial-gradient(500px 260px at 50% 0%,rgba(255,122,61,.12),transparent),
+    var(--panel);
+  padding:4rem 2rem;margin-bottom:4rem;
+}
+.contact h2{margin-bottom:.8rem}
+.contact p{color:var(--dim);margin-bottom:2rem}
+
+footer{
+  border-top:1px solid var(--line);text-align:center;padding:2rem 1rem;
+  color:var(--dim);font-size:.85rem;font-family:'JetBrains Mono',monospace;
+}
+footer .o{color:var(--orange)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#top">audry<span>@</span>dev:~$</a>
+  <ul>
+    <li><a href="#faq-me-up">FAQ-me-up</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+<header class="hero">
+  <div class="intro">Hi, I'm</div>
+  <h1>Audry <span class="accent">Stempel</span>.<br>I ship full-stack.</h1>
+  <p class="sub"><b>Senior Success Engineer</b> at <b>Lucky Orange</b>, after five years of engineering across the analytics platform that helps thousands of websites understand their visitors — from <b>Vue</b> front ends to <b>Node.js</b> microservices, billing systems, and a little AI on the side. Off the clock I tend a small jungle of houseplants — turns out debugging and plant care are the same job: observe, adjust one variable, wait. 🪴</p>
+  <div class="cta">
+    <a class="btn primary" href="#faq-me-up">See what I build</a>
+    <a class="btn ghost" href="#contact">Get in touch</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="num">700+</div><div class="lbl">commits shipped at Lucky Orange</div></div>
+    <div class="stat"><div class="num">500+</div><div class="lbl">pull requests merged</div></div>
+    <div class="stat"><div class="num">17</div><div class="lbl">microservices contributed to</div></div>
+  </div>
+</header>
+
+<section id="faq-me-up" class="reveal">
+  <div class="eyebrow">featured project</div>
+  <h2>FAQ-me-up 🤖</h2>
+  <div class="featured">
+    <span class="badge">AI · RAG chatbot</span>
+    <h3>A site-aware help-doc chatbot, <span class="mono">from crawl to chat</span></h3>
+    <p>An AI assistant that learns any website and answers questions about it. The pipeline crawls a site, chunks and embeds the content with <b>OpenAI vector embeddings</b>, and serves answers through a custom <b>Vue chat UI</b> — with streaming typewriter output, message persistence, and carefully tuned system prompts (plus confetti, because chatbots should be fun).</p>
+    <div class="pipeline">
+      <span class="step">crawl site</span><span class="arrow">→</span>
+      <span class="step">chunk + embed</span><span class="arrow">→</span>
+      <span class="step">vector search</span><span class="arrow">→</span>
+      <span class="step">GPT answer</span><span class="arrow">→</span>
+      <span class="step">Vue chat UI</span>
+    </div>
+    <div class="tagrow">
+      <span class="tag">Vue</span><span class="tag">Node.js</span><span class="tag">OpenAI API</span><span class="tag">Embeddings / RAG</span><span class="tag">Express</span>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="reveal">
+  <div class="eyebrow">what I work on</div>
+  <h2>Five years deep in a real production platform</h2>
+  <div class="work-grid">
+    <div class="wcard">
+      <div class="ico">💳</div>
+      <h3>Billing &amp; Payments</h3>
+      <p>Core contributor to the billing platform — plan pricing engines, proration and downgrade logic, grandfathered-plan handling, Braintree webhooks, and Shopify billing integrations, with tests to keep the money math honest.</p>
+      <div class="repos">billing · app · admin · lo-shopify-billing</div>
+    </div>
+    <div class="wcard">
+      <div class="ico">👁</div>
+      <h3>Visitor Analytics Engine</h3>
+      <p>Hands-on with the tech that makes Lucky Orange tick: session tracking and fingerprinting, iframe compatibility, heatmap infrastructure, and Elasticsearch-powered data under the hood.</p>
+      <div class="repos">core · fingerprint · heatmap-proxy · elasticsearch</div>
+    </div>
+    <div class="wcard">
+      <div class="ico">🎨</div>
+      <h3>Product &amp; Design System</h3>
+      <p>Vue features across the customer-facing app and admin — dashboards, plan pages, integrations UI — plus components in the shared design-system toolkit used across every product surface.</p>
+      <div class="repos">app · admin · toolkit · messenger</div>
+    </div>
+    <div class="wcard">
+      <div class="ico">⚙️</div>
+      <h3>Platform &amp; Infrastructure</h3>
+      <p>Migrated services to Google Artifact Registry, wrangled Dockerfiles and CI/CD pipelines, and maintained the cron jobs, mail, auth, and teams services that keep everything running quietly.</p>
+      <div class="repos">auth · mail · teams · crons · sites</div>
+    </div>
+  </div>
+</section>
+
+<section id="stack" class="reveal">
+  <div class="eyebrow">tech I actually commit in</div>
+  <h2>The stack</h2>
+  <div class="stack">
+    <span class="chip">Vue</span>
+    <span class="chip">JavaScript</span>
+    <span class="chip">Node.js</span>
+    <span class="chip">Express</span>
+    <span class="chip">Vuex</span>
+    <span class="chip">Elasticsearch</span>
+    <span class="chip">Docker</span>
+    <span class="chip">Google Cloud</span>
+    <span class="chip">CI/CD</span>
+    <span class="chip">Braintree</span>
+    <span class="chip">Shopify APIs</span>
+    <span class="chip">OpenAI API</span>
+    <span class="chip">REST APIs</span>
+    <span class="chip">Vite</span>
+    <span class="chip">CSS</span>
+  </div>
+  <p class="stack-note">Pulled straight from my commit history — not aspirational, just what I ship: Vue on the front, Node microservices on the back, containers underneath, and payment providers in between.</p>
+</section>
+
+<section id="journey" class="reveal">
+  <div class="eyebrow">the path</div>
+  <h2>How I got here</h2>
+  <div class="timeline">
+    <div class="tl">
+      <div class="when">Jan 2026 — present</div>
+      <h3>Senior Success Engineer · Lucky Orange</h3>
+      <p>Now the bridge between the codebase and the customers — bringing five years of platform engineering to the trickiest technical questions, implementations, and escalations.</p>
+    </div>
+    <div class="tl">
+      <div class="when">2021 — 2026</div>
+      <h3>Software Engineer · Lucky Orange</h3>
+      <p>From first commit to core contributor across 17 services — shipping features, owning billing logic, migrating infrastructure, and building AI prototypes at a KC Business Journal "Best Places to Work" winner.</p>
+    </div>
+    <div class="tl">
+      <div class="when">2021</div>
+      <h3>Full Stack Web Development · University of Kansas</h3>
+      <p>Traded a career in customer service and leadership for code, and never looked back.</p>
+    </div>
+    <div class="tl">
+      <div class="when">before tech</div>
+      <h3>Family Tree Nursery · Customer Service &amp; Leadership</h3>
+      <p>Managed teams and helped customers keep their plants alive at a beloved local garden center — where I learned how to lead people, translate expert knowledge for beginners, and yes, why there are so many plants on this page.</p>
+    </div>
+  </div>
+</section>
+
+<section id="kind-words" class="reveal">
+  <div class="eyebrow">kind words</div>
+  <h2>What teammates say</h2>
+  <div class="quotes">
+    <div class="quote">
+      <p>She handled back-end development on projects that required strong problem-solving skills… capable of adapting to front-end development if needed. Audry makes a great addition to your team!</p>
+      <div class="who">— Derimar Gray</div>
+    </div>
+    <div class="quote">
+      <p>Audry's attention to detail and technical savvy is unmatched. She is dependable, humble, teachable, personable, and genuinely passionate about helping others succeed.</p>
+      <div class="who">— Rob A.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact-wrap" style="padding-bottom:0">
+  <div class="contact reveal" id="contact">
+    <div class="eyebrow" style="text-align:center">say hello</div>
+    <h2>Let's build something</h2>
+    <p>Open to collaborating, talking shop, or trading plant-care tips. 🪴</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a class="btn primary" href="mailto:audryford792@gmail.com">Email me</a>
+      <a class="btn ghost" href="https://github.com/audryf" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/audry-stempel" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  built by audry stempel <span class="o">·</span> powered by coffee &amp; photosynthesis <span class="o">·</span> © 2026
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}})
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
 </html>
